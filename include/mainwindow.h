@@ -3,6 +3,7 @@
 
 #include "moorefsm.h"
 #include <QMainWindow>
+#include "QMessageBox"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,8 +22,18 @@ public:
 private slots:
     void on_makeStepPushButton_clicked();
 
+    void on_loadModelPushButton_clicked();
+
+    void on_clearModelPushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     MooreFSM* fsm;
+
+    // Список строк, которые можно менять
+    QList<int> rowsToClear = {0, 2, 3, 4, 5, 6};
+
+    void lockStaticCells();
+    void addStepToTraceTable(QString currentX);
 };
 #endif // MAINWINDOW_H
