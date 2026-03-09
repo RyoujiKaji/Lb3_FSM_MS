@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "moorefsm.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -17,7 +18,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_makeStepPushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    MooreFSM* fsm;
 };
 #endif // MAINWINDOW_H

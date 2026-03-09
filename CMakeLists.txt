@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # 3. Поиск пакетов Qt 6
 find_package(Qt6 REQUIRED COMPONENTS Widgets Core)
@@ -30,9 +31,16 @@ add_executable(${PROJECT_NAME}
     ${UI}
 )
 
+# Добавь эту настройку, чтобы AUTOUIC искал файлы в папке ui/
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ui"
+)
+
 # 7. Настройка путей для include (теперь цель существует, ошибки не будет)
 target_include_directories(${PROJECT_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_BINARY_DIR}"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen/include"
 )
 
 # 8. Линковка библиотек
